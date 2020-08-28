@@ -15,14 +15,59 @@ public class Player : MonoBehaviour
     [SerializeField]
     float moveSpeed = 2f;
 
+    [SerializeField]
+    float JumpForce = 5f;
+    Rigidbody rb;
+
+    [SerializeField]
+    Color rayColor = Color.magenta;
+
+    [SerializeField, Range(0.1f,10f)]
+    float rayDistance = 5;
+
+    [SerializeField]
+    LayerMask groundLayer;
+
+    [SerializeField]
+    Transform rayTransform;
+
     Animator anim;
 
     int score;
 
+    GameInputs gameInputs;
+    
+    void Awake(){
+        gameInputs = new GameInputs();
+        anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
+    }
     // Start is called before the first frame update
     void Start()
     {
-        anim = GetComponent<Animator>();
+      gameInputs.Land.Jump.performed+= _=> Jump();
+    }
+
+    void OnEnable(){
+        gameInputs.Enable();
+    }
+    
+    void OnDisable(){
+        gameInputs.Disable();
+    }
+
+    void Jump()
+    {
+        if(isGrounding)
+        {
+            rb.AddForce(Vector3.up * JumpForce, ForceMode.Impulse );
+        }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color=rayColor;
+        Gizmos.DrawRay(transform.position, -transform.up * rayDistance);    
     }
 
     // Update is called once per frame
@@ -38,7 +83,7 @@ public class Player : MonoBehaviour
         if(IsMoving)
         {
             transform.Translate( Vector3.forward * Time.deltaTime * moveSpeed);
-            transform.rotation = Quaternion.LookRotation(Axis.normalized);
+            transform.rotation = Quaternion.LookRotation(new Vector3(Axis.x,0f,Axis.y));
         }
     }
 
@@ -46,7 +91,7 @@ public class Player : MonoBehaviour
     /// Retunrs the axis with H input and V Input.
     /// </summary>
     /// <returns></returns>
-    Vector3 Axis => new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+    Vector3 Axis => gameInputs.Land.Move.ReadValue<Vector2>();
 
     /// <summary>
     /// Check if player is moving with inputs H and V.
@@ -58,6 +103,8 @@ public class Player : MonoBehaviour
     /// </summary>
     /// <returns></returns>
     float AxisMagnitudeAbs => Mathf.Abs(Axis.magnitude);
+
+    bool isGrounding => Physics.Raycast(rayTransform.position, -transform.up, rayDistance,groundLayer);
 
     void OnTriggerEnter(Collider other) 
     {

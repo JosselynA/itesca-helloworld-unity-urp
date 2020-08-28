@@ -573,6 +573,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &807267730
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 807267731}
+  m_Layer: 0
+  m_Name: rayPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &807267731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 807267730}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1385254445}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &820275680
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,7 +615,7 @@ GameObject:
   - component: {fileID: 820275683}
   - component: {fileID: 820275682}
   - component: {fileID: 820275681}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1052,7 +1082,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1001878388}
-  m_LocalRotation: {x: 0.28941837, y: 0.0023537723, z: -0.0007116852, w: 0.9571996}
+  m_LocalRotation: {x: 0.28941837, y: 0.0023537395, z: -0.00071167527, w: 0.9571996}
   m_LocalPosition: {x: -0.03, y: 4.0600004, z: -6.1}
   m_LocalScale: {x: 1, y: 0.59009, z: 1}
   m_Children:
@@ -1332,6 +1362,13 @@ MonoBehaviour:
   Sonido: {fileID: 82882383950009226, guid: 66d7082b576549f418aa2e6461ed2c97, type: 3}
   textMesh: {fileID: 838917344}
   moveSpeed: 5
+  JumpForce: 5
+  rayColor: {r: 1, g: 0, b: 1, a: 1}
+  rayDistance: 0.1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
+  rayTransform: {fileID: 807267731}
 --- !u!4 &1385254445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400122, guid: b01a3f6cbfa877645ae1653f51bd4cbe, type: 3}
@@ -1540,7 +1577,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1892920475}
-  m_LocalRotation: {x: 0.28941837, y: 0.0023537723, z: -0.0007116852, w: 0.9571996}
+  m_LocalRotation: {x: 0.28941837, y: 0.0023537395, z: -0.00071167527, w: 0.9571996}
   m_LocalPosition: {x: -0.03, y: 4.0600004, z: -6.1}
   m_LocalScale: {x: 1.146, y: 1.146, z: 1.146}
   m_Children: []
